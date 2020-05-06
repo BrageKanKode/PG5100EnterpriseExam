@@ -21,7 +21,7 @@ public class ItemService {
     private EntityManager entityManager;
 
 
-    //Erik sin
+
     public List<Item> getAllItems(Boolean withTravelers) {
         TypedQuery<Item> query = entityManager.createQuery(
                 "SELECT i FROM Item i ORDER BY i.value ASC", Item.class
@@ -42,7 +42,7 @@ public class ItemService {
         return items;
     }
 
-    //Erik sin
+
     public Item getRandomItem() {
         TypedQuery<Long> sizeQuery= entityManager.createQuery(
                 "select count(item) from Item item", Long.class);
@@ -59,22 +59,6 @@ public class ItemService {
         return item;
     }
 
-
-/*
-    //Kristoffer sin
-    public List<Item> getRandomItems(int numberOfRandomItems){
-        List<Item> item = new ArrayList<>(numberOfRandomItems);
-        Random rand = new Random();
-        int rnd = rand.nextInt((int)10);
-
-        TypedQuery<Item> query = entityManager.createQuery("SELECT item FROM Item item", Item.class)
-                .setFirstResult(rnd)
-                .setMaxResults(1);
-
-        return query.getResultList();
-    }
-
- */
 
     public Long createItem(String name, String ability, int value) {
         Item item = new Item();

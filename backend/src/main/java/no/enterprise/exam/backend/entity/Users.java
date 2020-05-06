@@ -66,8 +66,9 @@ public class Users {
         return currency;
     }
 
-    public void setCurrency(int currency) {
+    public Integer setCurrency(int currency) {
         this.currency = currency;
+        return null;
     }
 //@ManyToMany
     //private List<PlaceHolder> placeHolderList;

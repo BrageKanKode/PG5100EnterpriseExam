@@ -2,7 +2,6 @@ package no.enterprise.exam.backend.service;
 
 
 import no.enterprise.exam.backend.TestApplication;
-import no.enterprise.exam.backend.entity.Users;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -10,9 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
-
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest(classes = TestApplication.class,
@@ -28,7 +25,7 @@ public class CopyServiceTest extends ServiceTestBase{
     @Autowired
     private UserService userService;
 
-    @BeforeEach
+
 
 
     @Test
@@ -39,22 +36,20 @@ public class CopyServiceTest extends ServiceTestBase{
         assertNotNull(copyId);
     }
 
+
+
     @Test
     public void testSellItem() {
-        var test = userService.createUser("JackBlack", "Jackie", "Black", "123", "Jack@email.com", "user", 100, 3);
+        userService.createUser("JackBlack", "Jackie", "Black", "123", "Jack@email.com", "user", 100, 3);
         Long ItemID = itemService.createItem("Test", "Desc", 200);
         Long ItemID2 = itemService.createItem("Test2", "Desc", 200);
         Long copyId = copyService.addItemToUser(ItemID, "JackBlack");
         Long copyId2 = copyService.addItemToUser(ItemID2, "JackBlack");
 
+        long newValue = copyService.sellItem(copyId2, "JackBlack");
+        System.out.println(newValue);
+        assertEquals(300, newValue);
 
-        assertNotNull(copyId);
-        assertNotNull(copyId2);
-        assertNotNull(test);
-        assertTrue(copyService.getAllCopies().size() == 2);
-        copyService.sellItem(copyId2, "JackBlack");
-        System.out.println("---------------------------------------");
-        System.out.println(copyService.getAllCopies().size());
-        System.out.println("---------------------------------------");
+
     }
 }

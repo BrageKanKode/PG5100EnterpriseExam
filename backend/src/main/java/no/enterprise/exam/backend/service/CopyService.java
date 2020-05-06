@@ -26,23 +26,30 @@ public class CopyService {
         return query.getResultList();
     }
 
-    public void sellItem(Long copyId, String userId){
+    //Blanding
+    public Integer sellItem(Long copyId, String userId){
         Copy copy = entityManager.find(Copy.class, copyId);
         Users user = entityManager.find(Users.class, userId);
-        Item item = copy.getItemInformation();
 
 
         if (copy == null) {
-            throw new IllegalStateException("No copy with given userID");
+            throw new IllegalStateException("No copy with given copyID");
         }
-        if(copy.getAmount() > 1) {
-            entityManager.remove(copy);
-        } {
-            copy.setAmount(copy.getAmount() - 1);
+        if(user == null) {
+            throw new IllegalStateException("No user with given userID");
         }
 
-        int newCurrency = user.getCurrency() + item.getValue();
-        user.setCurrency(newCurrency);
+        int currency = user.getCurrency() + copy.getItemInformation().getValue();
+        int amount = copy.getAmount();
+
+        if(amount < 1) {
+            entityManager.remove(copy);
+        } else {
+            amount--;
+            copy.setAmount(amount);
+        }
+
+        return user.setCurrency(currency);
     }
 
     public Long addItemToUser(Long itemID, String userID) {
