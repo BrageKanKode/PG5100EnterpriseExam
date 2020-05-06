@@ -24,7 +24,7 @@ public class Users {
     @Size(max = 128)
     private String lastName;
 
-    @NotBlank
+    @NotNull
     private String hashedPassword;
 
     @ElementCollection(fetch = FetchType.EAGER)

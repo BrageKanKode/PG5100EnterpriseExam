@@ -4,18 +4,20 @@ import no.enterprise.exam.backend.entity.Copy;
 import no.enterprise.exam.backend.entity.Item;
 import no.enterprise.exam.backend.entity.Users;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityManager;
-import java.time.LocalDate;
+import javax.transaction.Transactional;
 
 
-
+@Service
+@Transactional
 public class CopyService {
 
     @Autowired
     private EntityManager entityManager;
 
-    public Long newPurchase(Long tripID, String userID) {
+    public Long addLootboxToUser(Long tripID, String userID) {
         Item item = entityManager.find(Item.class, tripID);
         Users users = entityManager.find(Users.class, userID);
 

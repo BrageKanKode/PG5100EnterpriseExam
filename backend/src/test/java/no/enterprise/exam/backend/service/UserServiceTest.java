@@ -19,6 +19,7 @@ public class UserServiceTest extends ServiceTestBase {
     @Autowired
     private UserService userService;
 
+
     @Test
     public void testCreateUser() {
         boolean userID = userService.createUser("JackBlack", "Jackie", "Black", "123", "Jack@email.com", "user", 100, 3);

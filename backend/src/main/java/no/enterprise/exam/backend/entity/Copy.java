@@ -1,10 +1,8 @@
 package no.enterprise.exam.backend.entity;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
+import javax.persistence.*;
 
+@Entity
 public class Copy {
 
     @Id
