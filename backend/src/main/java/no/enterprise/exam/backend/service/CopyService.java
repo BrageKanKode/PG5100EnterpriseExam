@@ -26,6 +26,10 @@ public class CopyService {
         return query.getResultList();
     }
 
+    public void openLootbox(int lootboxID){
+        Users lootbox = entityManager.find(Users.class, lootboxID);
+    }
+
     public Long addLootboxToUser(Long itemID, String userID) {
         Item item = entityManager.find(Item.class, itemID);
         Users users = entityManager.find(Users.class, userID);

@@ -42,6 +42,33 @@ public class UserService {
         return true;
     }
 
+    public Users buyLootbox(String userId){
+        Users user = em.find(Users.class, userId);
+
+        if (user == null) {
+            throw new IllegalStateException("No user with given userName");
+        }
+
+
+        if(user.getCurrency() < 50){
+            return user;
+        } else if(user.getLootboxes() <= 0) {
+            return user;
+        } else {
+            var lootbox = user.getLootboxes() - 1;
+            int lootboxCost = (int) (user.getCurrency() - 50);
+            user.setLootboxes(lootbox);
+            user.setCurrency(lootboxCost);
+        }
+
+        return user;
+
+    }
+    public void sellLootbox(String userId){
+        Users users = em.find(Users.class, userId);
+
+    }
+
     /*public Users findUserByUserName(String userName) {
         Users users = em.find(Users.class, userName);
         if (users == null) {
