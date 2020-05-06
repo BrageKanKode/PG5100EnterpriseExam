@@ -1,34 +1,31 @@
 package no.enterprise.exam.backend.service;
 
 import no.enterprise.exam.backend.entity.Item;
-import no.enterprise.exam.backend.entity.Users;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityManager;
-import java.util.Collections;
+import javax.transaction.Transactional;
+
 
 
 @Service
+@Transactional
 public class ItemService {
 
     @Autowired
-    private EntityManager em;
-
-    public boolean createItem(String itemName, String ability, int value) {
+    private EntityManager entityManager;
 
 
-        if ((em.find(Item.class, itemName) != null) || (em.find(Item.class, value) != null)) {
-            return false;
-        }
-
+    public Long createItem(String name, String ability, int value) {
         Item item = new Item();
-        item.setName(itemName);
+
+        item.setName(name);
         item.setAbility(ability);
         item.setValue(value);
 
-        em.persist(item);
+        entityManager.persist(item);
 
-        return true;
+        return item.getId();
     }
 }
