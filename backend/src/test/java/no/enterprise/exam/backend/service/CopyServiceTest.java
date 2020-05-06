@@ -56,7 +56,5 @@ public class CopyServiceTest extends ServiceTestBase{
         System.out.println("---------------------------------------");
         System.out.println(copyService.getAllCopies().size());
         System.out.println("---------------------------------------");
-
-
     }
 }

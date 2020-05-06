@@ -1,13 +1,16 @@
 package no.enterprise.exam.backend.service;
 
 import no.enterprise.exam.backend.entity.Item;
+import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 import javax.transaction.Transactional;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 
 @Service
@@ -18,6 +21,7 @@ public class ItemService {
     private EntityManager entityManager;
 
 
+    //Erik sin
     public List<Item> getAllItems(Boolean withTravelers) {
         TypedQuery<Item> query = entityManager.createQuery(
                 "SELECT i FROM Item i ORDER BY i.value ASC", Item.class
@@ -29,6 +33,48 @@ public class ItemService {
         }
         return allTrips;
     }
+
+    public List<Item> getRandomItems(int amount){
+        List<Item> items = new ArrayList<>(amount);
+        while(items.size() < amount){
+            items.add(getRandomItem());
+        }
+        return items;
+    }
+
+    //Erik sin
+    public Item getRandomItem() {
+        TypedQuery<Long> sizeQuery= entityManager.createQuery(
+                "select count(item) from Item item", Long.class);
+        long size = sizeQuery.getSingleResult();
+        Random random = new Random();
+        int rnd = random.nextInt((int)size);
+
+        TypedQuery<Item> query = entityManager
+                .createQuery("SELECT item FROM Item item", Item.class)
+                .setFirstResult(rnd)
+                .setMaxResults(1);
+        Item item = query.getSingleResult();
+
+        return item;
+    }
+
+
+/*
+    //Kristoffer sin
+    public List<Item> getRandomItems(int numberOfRandomItems){
+        List<Item> item = new ArrayList<>(numberOfRandomItems);
+        Random rand = new Random();
+        int rnd = rand.nextInt((int)10);
+
+        TypedQuery<Item> query = entityManager.createQuery("SELECT item FROM Item item", Item.class)
+                .setFirstResult(rnd)
+                .setMaxResults(1);
+
+        return query.getResultList();
+    }
+
+ */
 
     public Long createItem(String name, String ability, int value) {
         Item item = new Item();

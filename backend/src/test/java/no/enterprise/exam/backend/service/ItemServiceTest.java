@@ -17,11 +17,25 @@ public class ItemServiceTest {
     @Autowired
     private ItemService itemService;
 
+    @Autowired
+    private UserService userService;
+
     @Test
     public void testCreateItem() {
         Long itemId = itemService.createItem("Jigglypuff", "sleep", 100);
 
         assertNotNull(itemId);
+    }
+
+    @Test
+    public void testGetRandomItem() {
+        userService.createUser("JackBlack", "Jackie", "Black", "123", "Jack@email.com", "user", 100, 3);
+        Long itemJigg = itemService.createItem("Jigglypuff", "sleep", 100);
+        Long itemBowser = itemService.createItem("Bowser", "Sit", 200);
+        Long itemErik = itemService.createItem("Erik", "help", 500);
+        var randomItem = itemService.getRandomItems(2);
+
+        assertNotNull(randomItem);
 
     }
 }
