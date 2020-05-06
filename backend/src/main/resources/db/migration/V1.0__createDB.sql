@@ -39,6 +39,12 @@ create table users
     lootboxes       int,
     primary key (userid)
 );
+
+create table users_owned_by
+(
+    all_users_userid varchar(255) not null,
+    owned_by_id      bigint       not null
+);
 /*
 create table place_holder_all_placeholders
 (

@@ -24,11 +24,11 @@ public class Item {
     private int value;
 
 
-    /*
+
     @ManyToMany(mappedBy = "ownedBy")
     private List<Users> allUsers;
 
-     */
+
 
     public Item() {
     }
@@ -65,7 +65,7 @@ public class Item {
         this.value = value;
     }
 
-    /*
+
     public List<Users> getAllUsers() {
         return allUsers;
     }
@@ -74,5 +74,4 @@ public class Item {
         this.allUsers = allUsers;
     }
 
-     */
 }

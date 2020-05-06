@@ -6,6 +6,7 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -42,8 +43,19 @@ public class Users {
     @NotNull
     private int currency;
 
+    @ManyToMany
+    private List<Item> ownedBy;
+
+
     public int getLootboxes() {
         return lootboxes;
+    }
+    public List<Item> getOwnedBy() {
+        return ownedBy;
+    }
+
+    public void setOwnedBy(List<Item> bookedTrips) {
+        this.ownedBy = bookedTrips;
     }
 
     public void setLootboxes(int lootboxes) {
