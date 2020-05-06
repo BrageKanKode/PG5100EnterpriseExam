@@ -1,12 +1,13 @@
 create sequence hibernate_sequence start with 1 increment by 1;
-/*create table purchase
+/*create table Copy
 (
     id                  bigint       not null,
-    date_of_booking     date         not null,
-    booked_by_userid    varchar(255) not null,
-    trip_information_id bigint       not null,
+    name                varchar(255) not null,
+    ability             varchar(255) not null,
+    value               bigint       not null,
     primary key (id)
-);*//*
+);*/
+/*
 create table place_holder
 (
     id                bigint       not null,
@@ -17,6 +18,15 @@ create table place_holder
     title             varchar(300),
     primary key (id)
 );*/
+
+create table item
+(
+    id              bigint       not null,
+    name            varchar(300),
+    ability         varchar(255),
+    value           int          not null,
+    primary key (id)
+);
 create table users
 (
     userid          varchar(255) not null,
@@ -25,6 +35,8 @@ create table users
     hashed_password varchar(255),
     last_name       varchar(128),
     first_name      varchar(128),
+    currency        int,
+    lootboxes       int,
     primary key (userid)
 );
 /*

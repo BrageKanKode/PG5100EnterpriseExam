@@ -24,19 +24,19 @@ public class DefaultDataInitializerService {
 
         attempt(() -> {
             return userService.createUser(
-                    firstUser, firstUser, "admin-last-name", "123", "admin@email.com", "admin");
+                    firstUser, firstUser, "admin-last-name", "123", "admin@email.com", "admin", 100, 3);
 
         });
 
         attempt(() -> {
             return userService.createUser(
-                    secondUser, secondUser, "foo-last-name", "123", "foo@email.com", "user");
+                    secondUser, secondUser, "foo-last-name", "123", "foo@email.com", "user", 100, 3);
 
         });
 
         attempt(() -> {
             return userService.createUser(
-                    thirdUser, thirdUser, "bar-last-name", "123", "bar@email.com", "user");
+                    thirdUser, thirdUser, "bar-last-name", "123", "bar@email.com", "user", 200, 5);
 
         });
 

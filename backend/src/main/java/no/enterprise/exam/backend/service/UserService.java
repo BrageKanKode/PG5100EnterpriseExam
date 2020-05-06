@@ -19,7 +19,7 @@ public class UserService {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
-    public boolean createUser(String userName, String firstName, String lastName, String password, String email, String role) {
+    public boolean createUser(String userName, String firstName, String lastName, String password, String email, String role, int currency, int lootboxes) {
         String hashedPassword = passwordEncoder.encode(password);
 
         if ((em.find(Users.class, userName) != null) || (em.find(Users.class, email) != null)) {
@@ -34,6 +34,8 @@ public class UserService {
         users.setRoles(Collections.singleton(role));
         users.setEnabled(true);
         users.setEmail(email);
+        users.setCurrency(currency);
+        users.setLootboxes(lootboxes);
 
         em.persist(users);
 

@@ -40,7 +40,7 @@ public class Users {
     private int lootboxes;
 
     @NotNull
-    private long currency;
+    private int currency;
 
     public int getLootboxes() {
         return lootboxes;
@@ -54,7 +54,7 @@ public class Users {
         return currency;
     }
 
-    public void setCurrency(long currency) {
+    public void setCurrency(int currency) {
         this.currency = currency;
     }
 //@ManyToMany
