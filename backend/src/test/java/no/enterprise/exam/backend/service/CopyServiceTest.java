@@ -2,6 +2,8 @@ package no.enterprise.exam.backend.service;
 
 
 import no.enterprise.exam.backend.TestApplication;
+import no.enterprise.exam.backend.entity.Users;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,11 +12,12 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest(classes = TestApplication.class,
         webEnvironment = SpringBootTest.WebEnvironment.NONE)
-public class CopyServiceTest {
+public class CopyServiceTest extends ServiceTestBase{
 
     @Autowired
     private ItemService itemService;
@@ -25,11 +28,35 @@ public class CopyServiceTest {
     @Autowired
     private UserService userService;
 
+    @BeforeEach
+
+
     @Test
-    public void testCreatePurchase() {
+    public void testAddItemToUser() {
         userService.createUser("JackBlack", "Jackie", "Black", "123", "Jack@email.com", "user", 100, 3);
         Long tripID = itemService.createItem("Test", "Desc", 200);
-        Long purchaseId = copyService.addLootboxToUser(tripID, "JackBlack");
-        assertNotNull(purchaseId);
+        Long copyId = copyService.addItemToUser(tripID, "JackBlack");
+        assertNotNull(copyId);
+    }
+
+    @Test
+    public void testSellItem() {
+        var test = userService.createUser("JackBlack", "Jackie", "Black", "123", "Jack@email.com", "user", 100, 3);
+        Long ItemID = itemService.createItem("Test", "Desc", 200);
+        Long ItemID2 = itemService.createItem("Test2", "Desc", 200);
+        Long copyId = copyService.addItemToUser(ItemID, "JackBlack");
+        Long copyId2 = copyService.addItemToUser(ItemID2, "JackBlack");
+
+
+        assertNotNull(copyId);
+        assertNotNull(copyId2);
+        assertNotNull(test);
+        assertTrue(copyService.getAllCopies().size() == 2);
+        copyService.sellItem(copyId2, "JackBlack");
+        System.out.println("---------------------------------------");
+        System.out.println(copyService.getAllCopies().size());
+        System.out.println("---------------------------------------");
+
+
     }
 }

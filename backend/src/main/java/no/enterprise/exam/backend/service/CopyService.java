@@ -26,11 +26,26 @@ public class CopyService {
         return query.getResultList();
     }
 
-    public void openLootbox(int lootboxID){
-        Users lootbox = entityManager.find(Users.class, lootboxID);
+    public void sellItem(Long copyId, String userId){
+        Copy copy = entityManager.find(Copy.class, copyId);
+        Users user = entityManager.find(Users.class, userId);
+        Item item = copy.getItemInformation();
+
+
+        if (copy == null) {
+            throw new IllegalStateException("No copy with given userID");
+        }
+        if(copy.getAmount() > 1) {
+            entityManager.remove(copy);
+        } {
+            copy.setAmount(copy.getAmount() - 1);
+        }
+
+        int newCurrency = user.getCurrency() + item.getValue();
+        user.setCurrency(newCurrency);
     }
 
-    public Long addLootboxToUser(Long itemID, String userID) {
+    public Long addItemToUser(Long itemID, String userID) {
         Item item = entityManager.find(Item.class, itemID);
         Users users = entityManager.find(Users.class, userID);
 
@@ -42,6 +57,7 @@ public class CopyService {
         }
 
         Copy copy = new Copy();
+        copy.setAmount(copy.getAmount() + 1);
         copy.setOwnedBy(users);
         copy.setItemInformation(item);
         users.getOwnedBy().add(item);

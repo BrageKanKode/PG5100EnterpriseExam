@@ -4,6 +4,7 @@ create table copy
     id                  bigint       not null,
     item_information_id bigint,
     owned_by_userid     varchar(255),
+    amount              integer,
 
     primary key (id)
 );

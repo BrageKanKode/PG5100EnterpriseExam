@@ -62,7 +62,7 @@ public class Users {
         this.lootboxes = lootboxes;
     }
 
-    public long getCurrency() {
+    public int getCurrency() {
         return currency;
     }
 

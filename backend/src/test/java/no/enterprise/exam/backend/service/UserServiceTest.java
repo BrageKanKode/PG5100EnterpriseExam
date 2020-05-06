@@ -35,20 +35,17 @@ public class UserServiceTest extends ServiceTestBase {
         var user = userService.buyLootbox("JackBlack");
 
         System.out.println(user.getLootboxes());
-        assertTrue(user.getLootboxes() < 3);
+        assertTrue(user.getLootboxes() == 4);
 
     }
     @Test
     public void testFailToBuyLootbox() {
         userService.createUser("JackBlack", "Jackie", "Black", "123", "Jack@email.com", "user", 10, 3);
-        userService.createUser("SithMan", "Darth", "Maul", "Kenobi", "DarthMaul@email.com", "user", 100, 0);
 
         var jackBlack = userService.buyLootbox("JackBlack");
-        var darthMaul = userService.buyLootbox("SithMan");
 
 
         assertTrue(jackBlack.getLootboxes() == 3);
-        assertTrue(darthMaul.getCurrency() == 100);
 
     }
 }

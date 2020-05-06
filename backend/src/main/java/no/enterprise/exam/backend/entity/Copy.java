@@ -16,7 +16,17 @@ public class Copy {
     @ManyToOne
     private Item itemInformation;
 
+    private int amount;
+
     public Copy() {
+    }
+
+    public int getAmount() {
+        return amount;
+    }
+
+    public void setAmount(int amount) {
+        this.amount = amount;
     }
 
     public Long getId() {

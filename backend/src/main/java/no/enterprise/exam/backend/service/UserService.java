@@ -52,20 +52,14 @@ public class UserService {
 
         if(user.getCurrency() < 50){
             return user;
-        } else if(user.getLootboxes() <= 0) {
-            return user;
         } else {
-            var lootbox = user.getLootboxes() - 1;
-            int lootboxCost = (int) (user.getCurrency() - 50);
+            var lootbox = user.getLootboxes() + 1;
+            int lootboxCost = user.getCurrency() - 50;
             user.setLootboxes(lootbox);
             user.setCurrency(lootboxCost);
         }
 
         return user;
-
-    }
-    public void sellLootbox(String userId){
-        Users users = em.find(Users.class, userId);
 
     }
 
