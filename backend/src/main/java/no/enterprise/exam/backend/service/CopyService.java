@@ -7,7 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityManager;
+import javax.persistence.TypedQuery;
 import javax.transaction.Transactional;
+import java.util.List;
 
 
 @Service
@@ -17,8 +19,15 @@ public class CopyService {
     @Autowired
     private EntityManager entityManager;
 
-    public Long addLootboxToUser(Long tripID, String userID) {
-        Item item = entityManager.find(Item.class, tripID);
+
+    public List<Copy> getAllCopies(){
+        TypedQuery<Copy> query = entityManager.createQuery("SELECT c FROM Copy c",Copy.class);
+        System.out.println(query.getResultList());
+        return query.getResultList();
+    }
+
+    public Long addLootboxToUser(Long itemID, String userID) {
+        Item item = entityManager.find(Item.class, itemID);
         Users users = entityManager.find(Users.class, userID);
 
         if (item == null) {
