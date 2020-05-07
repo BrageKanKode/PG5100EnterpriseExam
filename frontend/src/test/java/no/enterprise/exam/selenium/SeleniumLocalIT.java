@@ -206,9 +206,13 @@ public class SeleniumLocalIT {
         home.redeemLootbox();
         }
 
+        String currencyValue = home.getText("currencyValue").split(" ")[1];
+        assertEquals("100", currencyValue);
         assertEquals(3, home.getNumberOfItemsDisplayed());
 
         home.millLootbox();
+        currencyValue = home.getText("currencyValue").split(" ")[1];
+        assertNotEquals("100", currencyValue);
         assertEquals(2, home.getNumberOfItemsDisplayed());
 
 
