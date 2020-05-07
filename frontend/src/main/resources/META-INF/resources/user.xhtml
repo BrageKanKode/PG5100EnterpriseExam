@@ -26,16 +26,31 @@
 
         <h2>My collection:</h2>
 
-        <h:outputLabel>Balance: #{users.currency}</h:outputLabel>
+        <h:outputLabel id="currencyValue">Balance: #{users.currency}</h:outputLabel>
         <br/>
-        <h:outputLabel>Lootboxes: #{users.lootboxes}</h:outputLabel>
+        <h:outputLabel id="lootboxValue">Lootboxes: #{users.lootboxes}</h:outputLabel>
 
 
-        <h:form>
-            <h:commandButton value="Open Lootbox" id="openLootboxBtn" styleClass="btn-outline-primary form-control m-2 p-2"
-                         action="#{itemController.openLootbox(users.userID)}"/>
-            <h:commandButton value="Buy Lootbox" id="buyBtn" styleClass="btn-outline-primary form-control m-2 p-2"
-                         action="#{itemController.buyLootbox(users.userID)}"/>
+        <h:form prependId="false">
+            <c:choose>
+                <c:when test="#{users.lootboxes == 0}">
+                    <p>You don't have more lootboxes</p>
+                </c:when>
+                <c:otherwise>
+                        <h:commandButton value="Open Lootbox" id="openLootboxBtn" styleClass="btn-outline-primary form-control m-2 p-2"
+                                         action="#{itemController.openLootbox(users.userID)}"/>
+                </c:otherwise>
+            </c:choose>
+
+            <c:choose>
+                <c:when test="#{users.currency lt 100}">
+                    <p>You don't have enough for another Lootbox :(</p>
+                </c:when>
+                <c:otherwise>
+                    <h:commandButton value="Buy Lootbox" id="buyBtn" styleClass="btn-outline-primary form-control m-2 p-2"
+                                     action="#{itemController.buyLootbox(users.userID)}"/>
+                </c:otherwise>
+            </c:choose>
             <p>Lootbox = 100 points</p>
         </h:form>
 

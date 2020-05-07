@@ -110,6 +110,8 @@ public class SeleniumLocalIT {
 
     @Test
     public void testDisplayHomePage() {
+
+        assertTrue(home.isOnPage());
         assertEquals(20, home.getNumberOfItemsDisplayed());
     }
 
@@ -147,7 +149,99 @@ public class SeleniumLocalIT {
         home.toUserPage();
         assertTrue(home.getDriver().getPageSource().contains(userID));
 
+        String lootboxValue = home.getText("lootboxValue");
+        assertEquals(1, home.getNumberOfItemsDisplayed());
+        assertEquals("3", lootboxValue.split(" ")[1]);
+
+        home.redeemLootbox();
+        home.redeemLootbox();
+
+        lootboxValue = home.getText("lootboxValue");
+        assertEquals(2, home.getNumberOfItemsDisplayed());
+        assertEquals("1", lootboxValue.split(" ")[1]);
+    }
+
+    @Test
+    public void testFailedReedemLootBox() {
+        assertFalse(home.isLoggedIn());
+        String userID = getUniqueId();
+        String password = "123456";
+        home = createNewUser(userID, password);
+        assumeTrue(home.isLoggedIn());
+        assumeTrue(home.getDriver().getPageSource().contains(userID));
+        home.toUserPage();
+        assertTrue(home.getDriver().getPageSource().contains(userID));
+
+
+        String lootboxValue = home.getText("lootboxValue");
+        assertEquals("3", lootboxValue.split(" ")[1]);
+        assertEquals(1, home.getNumberOfItemsDisplayed());
+
+        home.redeemLootbox();
+        home.redeemLootbox();
+        home.redeemLootbox();
+
+        lootboxValue = home.getText("lootboxValue");
+        assertEquals("0", lootboxValue.split(" ")[1]);
+        assertEquals(3, home.getNumberOfItemsDisplayed());
+
+        assertTrue(home.getDriver().getPageSource().contains("You don't have more lootboxes"));
+    }
+
+    @Test
+    public void testMillItem() {
+        assertFalse(home.isLoggedIn());
+        String userID = getUniqueId();
+        String password = "123456";
+        home = createNewUser(userID, password);
+        assumeTrue(home.isLoggedIn());
+        assumeTrue(home.getDriver().getPageSource().contains(userID));
+        home.toUserPage();
+        assertTrue(home.getDriver().getPageSource().contains(userID));
+
+        assertEquals(1, home.getNumberOfItemsDisplayed());
+
+        home.redeemLootbox();
+        home.redeemLootbox();
+        home.redeemLootbox();
+
+        assertEquals(3, home.getNumberOfItemsDisplayed());
+
+        home.millLootbox();
+        assertEquals(2, home.getNumberOfItemsDisplayed());
+
+
 
     }
-}
 
+    @Test
+    public void testBuyLootbox() {
+        assertFalse(home.isLoggedIn());
+
+        String userID = getUniqueId();
+        String password = "123456";
+
+        home = createNewUser(userID, password);
+
+        assumeTrue(home.isLoggedIn());
+        assumeTrue(home.getDriver().getPageSource().contains(userID));
+
+        home.toUserPage();
+        assertTrue(home.getDriver().getPageSource().contains(userID));
+
+
+        String currencyValue = home.getText("currencyValue").split(" ")[1];
+        String lootboxValue = home.getText("lootboxValue").split(" ")[1];
+
+        assertEquals("100", currencyValue);
+        assertEquals("3", lootboxValue);
+
+        home.buyLootbox();
+
+        currencyValue = home.getText("currencyValue").split(" ")[1];
+        lootboxValue = home.getText("lootboxValue").split(" ")[1];
+
+        assertEquals("0", currencyValue);
+        assertEquals("4", lootboxValue);
+    }
+}

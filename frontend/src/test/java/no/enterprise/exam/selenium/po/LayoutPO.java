@@ -45,15 +45,16 @@ public abstract class LayoutPO extends PageObject {
                 getDriver().findElements((By.id("linkToSignupId"))).isEmpty();
     }
 
-    public IndexPO toUserPage() {
+    public UserPO toUserPage() {
 
         clickAndWait("linkToUser");
 
-        IndexPO po = new IndexPO(this);
-        assertTrue(po.isOnUserPage());
+        UserPO po = new UserPO(this);
+        assertTrue(po.isOnPage());
 
         return po;
     }
+
 
     public boolean isInFirstColumn(String id) {
         List<WebElement> table = getDriver().findElements(By.xpath("//*[@id=\"tripTable\"]//tbody//td[1]"));
