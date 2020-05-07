@@ -50,13 +50,13 @@ public class DefaultDataInitializerService {
         });
 
         Long ItemID1 = attempt(() ->
-                itemService.createItem("Test", "Desc", 200)
+                itemService.createItem("Test", "Desc", 50)
         );
         Long ItemID2 = attempt(() ->
-                itemService.createItem("Test2", "Desc", 200)
+                itemService.createItem("Test2", "Desc", 50)
         );
         Long ItemID3 = attempt(() ->
-                itemService.createItem("Test3", "Desc", 200)
+                itemService.createItem("Test3", "Desc", 50)
         );
 
 

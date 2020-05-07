@@ -26,7 +26,23 @@ public class CopyService {
         return query.getResultList();
     }
 
-    //Blanding
+    public void buyLootbox(String userId){
+        Users user = entityManager.find(Users.class, userId);
+
+        if(user == null) {
+            throw new IllegalStateException("No user with given userId");
+        }
+
+        if(user.getCurrency() < 100){
+            return;
+        } else {
+            int lootbox = user.getLootboxes() + 1;
+            user.setLootboxes(lootbox);
+            user.setCurrency(user.getCurrency() - 100);
+        }
+    }
+
+
     public void sellItem(Long itemId, String userId){
         Item item = entityManager.find(Item.class, itemId);
         Users user = entityManager.find(Users.class, userId);
@@ -56,6 +72,12 @@ public class CopyService {
         }
         if (users == null) {
             throw new IllegalStateException("User not found");
+        }
+
+        if(users.getLootboxes() < 1){
+            return null;
+        } else {
+            users.setLootboxes(users.getLootboxes() - 1);
         }
 
         Copy copy = new Copy();

@@ -29,12 +29,16 @@ public class ItemController {
         return itemService.getAllItems(true).stream().limit(numberOfItems).collect(Collectors.toList());
     }
 
-    public void millItem(Long copyId, String userId){
-        copyService.sellItem(copyId, userId);
+    public void millItem(Long itemId, String userId){
+        copyService.sellItem(itemId, userId);
     }
 
-    public void openLootbox(){
+    public void openLootbox(String userId){
+        itemService.addRandomItemToUser(userId);
+    }
 
+    public void buyLootbox(String userId){
+        copyService.buyLootbox(userId);
     }
 
 

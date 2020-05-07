@@ -3,6 +3,7 @@ package no.enterprise.exam.backend.service;
 import no.enterprise.exam.backend.entity.Item;
 import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityManager;
@@ -20,6 +21,9 @@ public class ItemService {
     @Autowired
     private EntityManager entityManager;
 
+    @Autowired
+    private CopyService copyService;
+
 
 
     public List<Item> getAllItems(Boolean withOwners) {
@@ -34,6 +38,12 @@ public class ItemService {
         return allTrips;
     }
 
+    public void addRandomItemToUser(String userId){
+
+        Item newRandomItem = getRandomItem();
+        copyService.addItemToUser(newRandomItem.getId(), userId);
+
+    }
     public List<Item> getRandomItems(int amount){
         List<Item> items = new ArrayList<>(amount);
         while(items.size() < amount){
@@ -41,6 +51,7 @@ public class ItemService {
         }
         return items;
     }
+
 
 
     public Item getRandomItem() {
@@ -55,6 +66,7 @@ public class ItemService {
                 .setFirstResult(rnd)
                 .setMaxResults(1);
         Item item = query.getSingleResult();
+
 
         return item;
     }

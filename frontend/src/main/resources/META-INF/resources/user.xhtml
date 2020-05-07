@@ -32,8 +32,11 @@
 
 
         <h:form>
-            <h:commandButton value="Buy" id="buyBtn" styleClass="btn-outline-primary form-control m-2 p-2"
-                         action="#{itemController.millItem(item.id, users.userID)}"/>
+            <h:commandButton value="Open Lootbox" id="openLootboxBtn" styleClass="btn-outline-primary form-control m-2 p-2"
+                         action="#{itemController.openLootbox(users.userID)}"/>
+            <h:commandButton value="Buy Lootbox" id="buyBtn" styleClass="btn-outline-primary form-control m-2 p-2"
+                         action="#{itemController.buyLootbox(users.userID)}"/>
+            <p>Lootbox = 100 points</p>
         </h:form>
 
         <h:dataTable styleClass="table table-hover" value="#{users.ownedBy}"
