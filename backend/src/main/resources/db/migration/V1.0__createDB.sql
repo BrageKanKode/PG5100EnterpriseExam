@@ -60,7 +60,7 @@ create table users_roles
     roles        varchar(255)
 );
 
-/*
+
 alter table users
     add constraint UK_6dotkott2kjsp8vw4d0m25fb7 unique (email);
 alter table copy
@@ -74,4 +74,3 @@ alter table users_owned_by
 alter table users_roles
     add constraint FKnqgxij5udu4xrsqju9dtbc8pr foreign key (users_userid) references users;
 
- */

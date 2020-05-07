@@ -71,12 +71,12 @@ public class ItemService {
         return item;
     }
 
-    public List<Item> filterByCost(Long cost) {
+    public List<Item> filterByValue(Integer value) {
         TypedQuery<Item> query = entityManager.createQuery(
                 "SELECT i FROM Item i WHERE i.value =?1", Item.class
         );
 
-        query.setParameter(1, cost);
+        query.setParameter(1, value);
 
         return query.getResultList();
     }

@@ -21,7 +21,7 @@
 
         <c:if test="#{empty param['query']}">
             <ui:param name="listOfItems" value="#{itemController.getItems(20)}"/>
-            <ui:param name="errorText" value="No Gacha here!"/>
+            <ui:param name="errorText" value="No Ships here!"/>
         </c:if>
 
         <c:if test="#{!empty param['query']}">
@@ -29,23 +29,18 @@
                       value="#{itemController.filterItemsBy(param['searchBy'], param['query'])}"/>
             <ui:param name="errorText" value="No items meeting criteria"/>
         </c:if>
-        <c:choose>
-            <c:when test="#{listOfItems.size() == 0}">
-                <h:outputLabel>#{errorText}</h:outputLabel>
-            </c:when>
-            <c:otherwise>
-                <h:form prependId="false" styleClass="searchBox">
-                    <h:inputText id="queryInputId" styleClass="form-control m-2 p-2" value="#{searchController.query}"/>
-                    <h:selectOneMenu id="selectOneID" styleClass="form-control m-2 p-2"
-                                     value="#{searchController.selection}">
-                        <f:selectItem itemValue="byValue" itemLabel="Search by value"/>
-                        <f:selectItem itemValue="byName" itemLabel="Search by name"/>
-                    </h:selectOneMenu>
-                    <h:commandButton id="searchBtn" styleClass="btn-outline-primary form-control m-2 p-2" value="Submit"
-                                     action="#{searchController.getSearchLink()}"/>
-                </h:form>
-            </c:otherwise>
-        </c:choose>
+
+        <h:form prependId="false" styleClass="searchBox">
+            <h:inputText id="queryInputId" styleClass="form-control m-2 p-2" value="#{searchController.query}"/>
+            <h:selectOneMenu id="selectOneID" styleClass="form-control m-2 p-2"
+                             value="#{searchController.selection}">
+                <f:selectItem itemValue="byValue" itemLabel="Search by value"/>
+                <f:selectItem itemValue="byName" itemLabel="Search by name"/>
+            </h:selectOneMenu>
+            <h:commandButton id="searchBtn" styleClass="btn-outline-primary form-control m-2 p-2" value="Submit"
+                             action="#{searchController.getSearchLink()}"/>
+        </h:form>
+
 
 
 

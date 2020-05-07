@@ -43,7 +43,7 @@ public class ItemController {
 
     public List<Item> filterItemsBy(String searchBy, String query) {
         if (searchBy.equals("byValue")) {
-            return itemService.filterByCost(Long.valueOf(query));
+            return itemService.filterByValue(Integer.valueOf(query));
         } else if (searchBy.equals("byName")) {
             return itemService.filterItemsByNames(query);
         } else {
