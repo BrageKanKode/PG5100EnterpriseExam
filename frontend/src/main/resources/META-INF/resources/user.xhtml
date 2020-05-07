@@ -25,6 +25,8 @@
 
 
         <h2>My collection:</h2>
+
+
         <h:dataTable styleClass="table table-hover" value="#{users.ownedBy}"
                      var="item" border="1" id="itemTable">
             <h:column>
@@ -38,6 +40,12 @@
             <h:column>
                 <f:facet name="header">Ability</f:facet>
                 <h:outputText value="#{item.ability}"/>
+            </h:column>
+            <h:column>
+                <h:form prependId="false">
+                    <h:commandButton value="mill" id="millBtn" styleClass="btn-outline-primary form-control m-2 p-2"
+                                    action="#{itemController.millItem(item.id, users.userID)}"/>
+                </h:form>
             </h:column>
         </h:dataTable>
 
