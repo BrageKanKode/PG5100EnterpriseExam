@@ -91,7 +91,7 @@ public class SeleniumLocalIT {
     }
 
     @Test
-    public void testCreateAndLogoutUser() {
+    public void testCreateAndLogoutAndLogInUser() {
         assertFalse(home.isLoggedIn());
 
         String userID = getUniqueId();
@@ -108,5 +108,46 @@ public class SeleniumLocalIT {
         assertFalse(home.getDriver().getPageSource().contains(userID));
     }
 
+    @Test
+    public void testDisplayHomePage() {
+        assertEquals(20, home.getNumberOfItemsDisplayed());
+    }
 
+    @Test
+    public void testEmptyCollection() {
+        assertFalse(home.isLoggedIn());
+
+        String userID = getUniqueId();
+        String password = "123456";
+
+        home = createNewUser(userID, password);
+
+        assumeTrue(home.isLoggedIn());
+        assumeTrue(home.getDriver().getPageSource().contains(userID));
+
+        home.toUserPage();
+
+        assertTrue(home.getDriver().getPageSource().contains(userID));
+
+        assertEquals(1, home.getNumberOfItemsDisplayed());
+    }
+
+    @Test
+    public void testRedeemLootBox() {
+        assertFalse(home.isLoggedIn());
+
+        String userID = getUniqueId();
+        String password = "123456";
+
+        home = createNewUser(userID, password);
+
+        assumeTrue(home.isLoggedIn());
+        assumeTrue(home.getDriver().getPageSource().contains(userID));
+
+        home.toUserPage();
+        assertTrue(home.getDriver().getPageSource().contains(userID));
+
+
+    }
 }
+

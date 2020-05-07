@@ -31,7 +31,7 @@ public class IndexPO extends LayoutPO {
         return buttons.get(indexOfButton).getAttribute("id");
     }
 
-    public int getNumberOfTripsDisplayed() {
+    public int getNumberOfItemsDisplayed() {
         return getDriver().findElements(By.xpath("//table//tr")).size() - 1;
     }
 
@@ -50,6 +50,12 @@ public class IndexPO extends LayoutPO {
     public boolean isOnPage() {
         return getDriver().getTitle().contains("Home page");
     }
+
+
+    public boolean isOnUserPage() {
+        return getDriver().getTitle().contains("User page");
+    }
+
 
     /*public DetailsPO getDetails(String id) {
         clickAndWait(id);

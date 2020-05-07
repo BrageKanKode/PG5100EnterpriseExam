@@ -30,7 +30,6 @@ public class SignUpController {
     private String username;
 
     @NotBlank
-    @Min(3)
     private String password;
 
     public String signUpUser() {
