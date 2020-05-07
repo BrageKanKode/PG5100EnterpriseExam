@@ -27,7 +27,7 @@ public class CopyService {
     }
 
     //Blanding
-    public Integer sellItem(Long copyId, String userId){
+    public int sellItem(Long copyId, String userId){
         Copy copy = entityManager.find(Copy.class, copyId);
         Users user = entityManager.find(Users.class, userId);
 
@@ -48,8 +48,8 @@ public class CopyService {
             amount--;
             copy.setAmount(amount);
         }
-
-        return user.setCurrency(currency);
+        user.setCurrency(currency);
+        return user.getCurrency();
     }
 
     public Long addItemToUser(Long itemID, String userID) {

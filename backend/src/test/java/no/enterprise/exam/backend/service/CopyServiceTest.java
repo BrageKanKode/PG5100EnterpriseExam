@@ -46,7 +46,7 @@ public class CopyServiceTest extends ServiceTestBase{
         Long copyId = copyService.addItemToUser(ItemID, "JackBlack");
         Long copyId2 = copyService.addItemToUser(ItemID2, "JackBlack");
 
-        long newValue = copyService.sellItem(copyId2, "JackBlack");
+        int newValue = copyService.sellItem(copyId2, "JackBlack");
         System.out.println(newValue);
         assertEquals(300, newValue);
 

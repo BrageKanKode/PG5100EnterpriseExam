@@ -66,12 +66,9 @@ public class Users {
         return currency;
     }
 
-    public Integer setCurrency(int currency) {
+    public void setCurrency(int currency) {
         this.currency = currency;
-        return null;
     }
-//@ManyToMany
-    //private List<PlaceHolder> placeHolderList;
 
     public String getUserID() {
         return userID;

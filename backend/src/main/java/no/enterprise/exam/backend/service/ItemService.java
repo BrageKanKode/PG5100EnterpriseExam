@@ -22,13 +22,13 @@ public class ItemService {
 
 
 
-    public List<Item> getAllItems(Boolean withTravelers) {
+    public List<Item> getAllItems(Boolean withOwners) {
         TypedQuery<Item> query = entityManager.createQuery(
                 "SELECT i FROM Item i ORDER BY i.value ASC", Item.class
         );
         List<Item> allTrips = query.getResultList();
 
-        if (withTravelers) {
+        if (withOwners) {
             allTrips.forEach(u -> u.getAllUsers().size());
         }
         return allTrips;

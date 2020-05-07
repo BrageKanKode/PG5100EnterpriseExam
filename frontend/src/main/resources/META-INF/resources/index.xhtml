@@ -4,6 +4,7 @@
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:sec="http://www.springframework.org/security/tags"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:c="http://xmlns.jcp.org/jsp/jstl/core" xmlns:f="http://java.sun.com/jsf/core"
       xml:lang="en" lang="en">
@@ -13,7 +14,62 @@
     </ui:define>
 
     <ui:define name="content">
-        <p>Hello World!</p>
+        <h2>Gacha Game!</h2>
+
+
+        <ui:param name="errorText" value=""/>
+
+        <c:if test="#{empty param['query']}">
+            <ui:param name="listOfItems" value="#{itemController.getItems(10)}"/>
+            <ui:param name="errorText" value="No Gacha here!"/>
+        </c:if>
+
+        <c:if test="#{!empty param['query']}">
+            <ui:param name="listOfItems"
+                      value="#{itemController.filterItemsBy(param['searchBy'], param['query'])}"/>
+            <ui:param name="errorText" value="No items meering criteria"/>
+        </c:if>
+        <c:choose>
+            <c:when test="#{listOfItems.size() == 0}">
+                <h:outputLabel>#{errorText}</h:outputLabel>
+            </c:when>
+            <c:otherwise>
+                <h:form prependId="false" styleClass="searchBox">
+                    <h:inputText id="queryInputId" styleClass="form-control m-2 p-2" value="#{searchController.query}"/>
+                    <h:selectOneMenu id="selectOneID" styleClass="form-control m-2 p-2"
+                                     value="#{searchController.selection}">
+                        <f:selectItem itemValue="byValue" itemLabel="Search by value"/>
+                        <f:selectItem itemValue="byName" itemLabel="Search by name"/>
+                    </h:selectOneMenu>
+                    <h:commandButton id="searchBtn" styleClass="btn-outline-primary form-control m-2 p-2" value="Submit"
+                                     action="#{seachController.getSearchLink()}"/>
+                </h:form>
+            </c:otherwise>
+        </c:choose>
+
+
+
+
+        <h:dataTable styleClass="table table-hover" value="#{listOfItems}"
+                     var="item" border="1" id="itemTable">
+            <h:column>
+                <f:facet name="header">Item ID</f:facet>
+                <h:outputText value="#{item.id}"/>
+            </h:column>
+            <h:column>
+                <f:facet name="header">Name</f:facet>
+                <h:outputText value="#{item.name}"/>
+            </h:column>
+            <h:column>
+                <f:facet name="header">Ability</f:facet>
+                <h:outputText value="#{item.ability}"/>
+            </h:column>
+            <h:column>
+                <f:facet name="header">Value</f:facet>
+                <h:outputText value="#{item.value}"/>
+            </h:column>
+
+        </h:dataTable>
     </ui:define>
 </ui:composition>
 
