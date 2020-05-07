@@ -26,15 +26,24 @@
 
         <h2>My collection:</h2>
 
+        <h:outputLabel>Balance: #{users.currency}</h:outputLabel>
+        <br/>
+        <h:outputLabel>Lootboxes: #{users.lootboxes}</h:outputLabel>
+
+
+        <h:form>
+            <h:commandButton value="Buy" id="buyBtn" styleClass="btn-outline-primary form-control m-2 p-2"
+                         action="#{itemController.millItem(item.id, users.userID)}"/>
+        </h:form>
 
         <h:dataTable styleClass="table table-hover" value="#{users.ownedBy}"
                      var="item" border="1" id="itemTable">
             <h:column>
-                <f:facet name="header">Item ID</f:facet>
+                <f:facet name="header">Gacha ID</f:facet>
                 <h:outputText value="#{item.id}"/>
             </h:column>
             <h:column>
-                <f:facet name="header">Name</f:facet>
+                <f:facet name="header">Gacha</f:facet>
                 <h:outputText value="#{item.name}"/>
             </h:column>
             <h:column>
@@ -42,8 +51,12 @@
                 <h:outputText value="#{item.ability}"/>
             </h:column>
             <h:column>
+                <f:facet name="header">Value</f:facet>
+                <h:outputText value="#{item.value}"/>
+            </h:column>
+            <h:column>
                 <h:form prependId="false">
-                    <h:commandButton value="mill" id="millBtn" styleClass="btn-outline-primary form-control m-2 p-2"
+                    <h:commandButton value="Mill" id="millBtn" styleClass="btn-outline-primary form-control m-2 p-2"
                                     action="#{itemController.millItem(item.id, users.userID)}"/>
                 </h:form>
             </h:column>
