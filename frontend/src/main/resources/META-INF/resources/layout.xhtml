@@ -18,10 +18,10 @@
     <a id="homepageLinkId" href="index.jsf" class="btn  p-1 m-3 btn-outline-primary">Home page</a>
     <sec:authenticated>
         <a id="logoutBtn" class="btn  p-1 m-3 btn-outline-danger" href="/logout">Logout</a><br/>
-        <h:outputLabel>Welcome: </h:outputLabel><h:link class="btn  p-1 m-3 btn-outline-success" id="userID" outcome="collection"
+        <h:outputLabel>Welcome: </h:outputLabel><h:link class="btn  p-1 m-3 btn-outline-success" id="userID" outcome="user"
                                                         value="#{userInfoController.userName}"/>
         <br/>
-        <a id="linkToCollection" href="collection.jsf" class="btn  p-1 m-3 btn-outline-success">My collection</a>
+        <a id="linkToUser" href="user.jsf" class="btn  p-1 m-3 btn-outline-success">My collection</a>
     </sec:authenticated>
 
     <sec:anonymous>

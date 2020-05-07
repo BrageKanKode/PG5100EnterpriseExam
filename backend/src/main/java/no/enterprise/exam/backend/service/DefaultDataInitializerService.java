@@ -8,6 +8,8 @@ import javax.annotation.PostConstruct;
 import java.util.List;
 import java.util.function.Supplier;
 
+import static org.hibernate.validator.internal.util.Contracts.assertNotNull;
+
 @Service
 public class DefaultDataInitializerService {
 
@@ -53,6 +55,10 @@ public class DefaultDataInitializerService {
         Long ItemID2 = attempt(() ->
                 itemService.createItem("Test2", "Desc", 200)
         );
+        Long ItemID3 = attempt(() ->
+                itemService.createItem("Test3", "Desc", 200)
+        );
+
 
         copyService.addItemToUser(ItemID1, firstUser);
         copyService.addItemToUser(ItemID2, secondUser);

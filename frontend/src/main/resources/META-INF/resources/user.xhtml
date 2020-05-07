@@ -15,10 +15,27 @@
     </ui:define>
 
     <ui:define name="content">
-        <c:set var="users" value="#{userInfoController.user}"/>
         <br/>
         <h:outputLabel id="userNameID">User name: #{users.name}</h:outputLabel><br/>
         <h:outputLabel>User last name: #{users.lastName}</h:outputLabel><br/>
+
+
+        <c:set var="users" value="#{userInfoController.user}"/>
+        <h:dataTable styleClass="table table-hover" value="#{users.ownedBy}"
+                     var="item" border="1" id="itemTable">
+        <h:column>
+            <f:facet name="header">Item ID</f:facet>
+            <h:outputText value="#{item.id}"/>
+        </h:column>
+        <h:column>
+            <f:facet name="header">Name</f:facet>
+            <h:outputText value="#{item.name}"/>
+        </h:column>
+        <h:column>
+            <f:facet name="header">Ability</f:facet>
+            <h:outputText value="#{item.ability}"/>
+        </h:column>
+        </h:dataTable>
 
     </ui:define>
 
