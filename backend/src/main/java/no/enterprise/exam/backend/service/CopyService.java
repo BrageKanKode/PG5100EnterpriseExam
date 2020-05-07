@@ -54,18 +54,43 @@ public class CopyService {
         if(user == null) {
             throw new IllegalStateException("No user with given userId");
         }
-
         List<Item> items = user.getOwnedBy();
-        int currency = user.getCurrency() + item.getValue();
 
+        Copy copy = findByUserAndItem(itemId, userId);
+        if(copy.getAmount() > 1){
+            copy.setAmount(copy.getAmount() - 1);
+            item.setAmount(item.getAmount() - 1);
+        } else {
+            items.remove(item);
+            copy.setAmount(0);
+            item.setAmount(0);
+        }
+
+        int currency = user.getCurrency() + item.getValue();
         user.setCurrency(currency);
 
-        items.remove(item);
+    }
+
+    public boolean existsByUserAndItem(Long itemID, String userID){
+        TypedQuery<Long> query = entityManager.createQuery("SELECT COUNT(copy) FROM Copy copy WHERE copy.ownedBy.userID = ?1 AND copy.itemInformation.id = ?2", Long.class);
+        query.setParameter(1, userID);
+        query.setParameter(2, itemID);
+
+        return query.getSingleResult() > 0;
+    }
+
+    public Copy findByUserAndItem(Long itemID, String userID){
+        TypedQuery<Copy> query = entityManager.createQuery("SELECT copy FROM Copy copy WHERE copy.ownedBy.userID = ?1 AND copy.itemInformation.id = ?2", Copy.class);
+        query.setParameter(1, userID);
+        query.setParameter(2, itemID);
+
+        return query.getSingleResult();
     }
 
     public Long addItemToUser(Long itemID, String userID) {
         Item item = entityManager.find(Item.class, itemID);
         Users users = entityManager.find(Users.class, userID);
+
 
         if (item == null) {
             throw new IllegalStateException("Trip not found");
@@ -80,12 +105,23 @@ public class CopyService {
             users.setLootboxes(users.getLootboxes() - 1);
         }
 
-        Copy copy = new Copy();
-        copy.setAmount(copy.getAmount() + 1);
-        copy.setOwnedBy(users);
-        copy.setItemInformation(item);
-        users.getOwnedBy().add(item);
-        entityManager.persist(copy);
+
+        Copy copy;
+
+        if(existsByUserAndItem(itemID, userID)){
+            copy = findByUserAndItem(itemID, userID);
+            copy.setAmount(copy.getAmount() + 1);
+            item.setAmount(item.getAmount() + 1);
+        } else {
+            copy = new Copy();
+            copy.setAmount(1);
+            item.setAmount(1);
+            copy.setOwnedBy(users);
+            copy.setItemInformation(item);
+            users.getOwnedBy().add(item);
+            entityManager.persist(copy);
+
+        }
 
         return copy.getId();
     }

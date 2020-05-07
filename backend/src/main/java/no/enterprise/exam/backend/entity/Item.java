@@ -23,6 +23,8 @@ public class Item {
     @NotNull
     private int value;
 
+    private int amount;
+
 
 
     @ManyToMany(mappedBy = "ownedBy")
@@ -31,6 +33,14 @@ public class Item {
 
 
     public Item() {
+    }
+
+    public int getAmount() {
+        return amount;
+    }
+
+    public void setAmount(int amount) {
+        this.amount = amount;
     }
 
     public long getId() {

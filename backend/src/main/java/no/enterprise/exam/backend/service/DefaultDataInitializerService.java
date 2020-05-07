@@ -62,13 +62,6 @@ public class DefaultDataInitializerService {
 
         copyService.addItemToUser(ItemID1, firstUser);
         copyService.addItemToUser(ItemID2, secondUser);
-/*
-        List<Item> randomItem = itemService.getRandomItems(1);
-        copyService.addItemToUser(randomItem.get(1).getId(), firstUser);
-
- */
-
-
 
     }
 

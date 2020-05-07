@@ -26,6 +26,7 @@ create table item
     name            varchar(300),
     ability         varchar(255),
     value           int          not null,
+    amount          int,
     primary key (id)
 );
 create table users
