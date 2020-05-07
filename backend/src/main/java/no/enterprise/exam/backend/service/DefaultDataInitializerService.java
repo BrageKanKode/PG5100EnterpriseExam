@@ -53,6 +53,9 @@ public class DefaultDataInitializerService {
         Long ItemID2 = attempt(() ->
                 itemService.createItem("Test2", "Desc", 200)
         );
+
+        copyService.addItemToUser(ItemID1, firstUser);
+        copyService.addItemToUser(ItemID2, secondUser);
 /*
         List<Item> randomItem = itemService.getRandomItems(1);
         copyService.addItemToUser(randomItem.get(1).getId(), firstUser);

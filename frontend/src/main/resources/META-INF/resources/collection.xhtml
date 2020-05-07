@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+        PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:sec="http://www.springframework.org/security/tags"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core" xmlns:f="http://java.sun.com/jsf/core"
+      xml:lang="en" lang="en">
+<ui:composition template="layout.xhtml">
+    <ui:define name="title">
+        Home page
+    </ui:define>
+
+    <ui:define name="content">
+        <h2>My collection</h2>
+
+
+        <ui:param name="errorText" value=""/>
+
+        <c:if test="#{empty param['query']}">
+            <ui:param name="listOfItems" value="#{collectionController.getCopies(10)}"/>
+            <ui:param name="errorText" value="No Gacha here!"/>
+        </c:if>
+
+        <c:if test="#{!empty param['query']}">
+            <ui:param name="listOfItems"
+                      value="#{itemController.filterItemsBy(param['searchBy'], param['query'])}"/>
+            <ui:param name="errorText" value="No items meering criteria"/>
+        </c:if>
+
+
+
+
+        <h:dataTable styleClass="table table-hover" value="#{listOfItems}"
+                     var="copy" border="1" id="itemTable">
+            <h:column>
+                <f:facet name="header">Item ID</f:facet>
+                <h:outputText value="#{copy.id}"/>
+            </h:column>
+            <h:column>
+                <f:facet name="header">Name</f:facet>
+                <h:outputText value="#{copy.itemInformation.name}"/>
+            </h:column>
+            <h:column>
+                <f:facet name="header">Ability</f:facet>
+                <h:outputText value="#{copy.itemInformation.ability}"/>
+            </h:column>
+
+        </h:dataTable>
+    </ui:define>
+</ui:composition>
+
+</html>
