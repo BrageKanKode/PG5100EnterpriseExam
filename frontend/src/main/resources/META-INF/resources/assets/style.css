@@ -1,0 +1,19 @@
+@import "bootstrap.min.css";
+
+.descriptiionData {
+    display: grid;
+    padding: 20px;
+    border: 2px grey solid;
+    border-radius: 3px;
+    box-shadow: black;
+    margin: 30px;
+}
+
+body {
+    background-color: turquoise;
+}
+
+.searchBox {
+    display: inline-block !important;
+    max-width: 400px !important;
+}

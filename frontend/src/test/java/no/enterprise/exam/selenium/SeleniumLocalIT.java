@@ -153,8 +153,9 @@ public class SeleniumLocalIT {
         assertEquals(1, home.getNumberOfItemsDisplayed());
         assertEquals("3", lootboxValue.split(" ")[1]);
 
-        home.redeemLootbox();
-        home.redeemLootbox();
+        for(int i=0; i<2; i++){
+            home.redeemLootbox();
+        }
 
         lootboxValue = home.getText("lootboxValue");
         assertEquals(2, home.getNumberOfItemsDisplayed());
@@ -177,9 +178,9 @@ public class SeleniumLocalIT {
         assertEquals("3", lootboxValue.split(" ")[1]);
         assertEquals(1, home.getNumberOfItemsDisplayed());
 
-        home.redeemLootbox();
-        home.redeemLootbox();
-        home.redeemLootbox();
+        for(int i=0; i<3; i++){
+            home.redeemLootbox();
+        }
 
         lootboxValue = home.getText("lootboxValue");
         assertEquals("0", lootboxValue.split(" ")[1]);
@@ -201,9 +202,9 @@ public class SeleniumLocalIT {
 
         assertEquals(1, home.getNumberOfItemsDisplayed());
 
+        for(int i=0; i<3; i++){
         home.redeemLootbox();
-        home.redeemLootbox();
-        home.redeemLootbox();
+        }
 
         assertEquals(3, home.getNumberOfItemsDisplayed());
 

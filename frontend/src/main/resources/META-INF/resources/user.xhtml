@@ -26,7 +26,7 @@
 
         <h2>My collection:</h2>
 
-        <h:outputLabel id="currencyValue">Balance: #{users.currency}</h:outputLabel>
+        <h:outputLabel id="currencyValue">UEC: #{users.currency}</h:outputLabel>
         <br/>
         <h:outputLabel id="lootboxValue">Lootboxes: #{users.lootboxes}</h:outputLabel>
 
@@ -51,7 +51,7 @@
                                      action="#{itemController.buyLootbox(users.userID)}"/>
                 </c:otherwise>
             </c:choose>
-            <p>Lootbox = 100 points</p>
+            <p>Lootbox = 100 UEC</p>
         </h:form>
 
         <h:dataTable styleClass="table table-hover" value="#{users.ownedBy}"

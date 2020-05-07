@@ -65,7 +65,7 @@ public class IndexPO extends LayoutPO {
     }
 
     public UserPO millLootbox() {
-        clickAndWait("millBtn");
+        clickAndWait("itemTable:2:millBtn");
 
         UserPO po = new UserPO(this);
         assertTrue(po.isOnPage());
