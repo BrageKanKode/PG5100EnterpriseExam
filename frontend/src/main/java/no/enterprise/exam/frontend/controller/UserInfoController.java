@@ -13,9 +13,6 @@ import javax.inject.Named;
 @RequestScoped
 public class UserInfoController {
 
-    /*@Autowired
-    private PurchaseService purchaseService;*/
-
     @Autowired
     private UserService userService;
 
