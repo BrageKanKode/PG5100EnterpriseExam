@@ -27,7 +27,7 @@
         <c:if test="#{!empty param['query']}">
             <ui:param name="listOfItems"
                       value="#{itemController.filterItemsBy(param['searchBy'], param['query'])}"/>
-            <ui:param name="errorText" value="No items meering criteria"/>
+            <ui:param name="errorText" value="No items meeting criteria"/>
         </c:if>
         <c:choose>
             <c:when test="#{listOfItems.size() == 0}">
@@ -42,7 +42,7 @@
                         <f:selectItem itemValue="byName" itemLabel="Search by name"/>
                     </h:selectOneMenu>
                     <h:commandButton id="searchBtn" styleClass="btn-outline-primary form-control m-2 p-2" value="Submit"
-                                     action="#{seachController.getSearchLink()}"/>
+                                     action="#{searchController.getSearchLink()}"/>
                 </h:form>
             </c:otherwise>
         </c:choose>

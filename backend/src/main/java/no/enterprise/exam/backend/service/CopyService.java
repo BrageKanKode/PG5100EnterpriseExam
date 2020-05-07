@@ -68,7 +68,6 @@ public class CopyService {
 
         int currency = user.getCurrency() + item.getValue();
         user.setCurrency(currency);
-
     }
 
     public boolean existsByUserAndItem(Long itemID, String userID){

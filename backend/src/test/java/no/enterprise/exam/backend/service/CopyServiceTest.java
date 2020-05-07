@@ -2,12 +2,15 @@ package no.enterprise.exam.backend.service;
 
 
 import no.enterprise.exam.backend.TestApplication;
+import no.enterprise.exam.backend.entity.Users;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
+
+import javax.persistence.EntityManager;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -36,21 +39,25 @@ public class CopyServiceTest extends ServiceTestBase{
         assertNotNull(copyId);
     }
 
-    /*
+    @Autowired
+    private EntityManager entityManager;
+
     @Test
     public void testSellItem() {
         userService.createUser("JackBlack", "Jackie", "Black", "123", "Jack@email.com", "user", 100, 3);
         Long ItemID = itemService.createItem("Test", "Desc", 200);
         Long ItemID2 = itemService.createItem("Test2", "Desc", 200);
-        Long copyId = copyService.addItemToUser(ItemID, "JackBlack");
-        Long copyId2 = copyService.addItemToUser(ItemID2, "JackBlack");
+        Long addedID = copyService.addItemToUser(ItemID, "JackBlack");
+        Long addedID2 = copyService.addItemToUser(ItemID2, "JackBlack");
 
-        copyService.sellItem(copyId2, "JackBlack");
-        assertEquals(300, );
+        copyService.sellItem(ItemID, "JackBlack");
+
+        Users users = entityManager.find(Users.class, "JackBlack");
+        assertEquals(300, users.getCurrency());
 
 
     }
 
-     */
+
 
 }

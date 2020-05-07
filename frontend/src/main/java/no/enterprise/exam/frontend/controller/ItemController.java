@@ -41,6 +41,16 @@ public class ItemController {
         copyService.buyLootbox(userId);
     }
 
+    public List<Item> filterItemsBy(String searchBy, String query) {
+        if (searchBy.equals("byValue")) {
+            return itemService.filterByCost(Long.valueOf(query));
+        } else if (searchBy.equals("byName")) {
+            return itemService.filterItemsByNames(query);
+        } else {
+            return null;
+        }
+    }
+
 
 
     public String getMonsterRedirectionLink(Long itemID){

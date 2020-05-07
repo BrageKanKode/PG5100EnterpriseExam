@@ -71,6 +71,26 @@ public class ItemService {
         return item;
     }
 
+    public List<Item> filterByCost(Long cost) {
+        TypedQuery<Item> query = entityManager.createQuery(
+                "SELECT i FROM Item i WHERE i.value =?1", Item.class
+        );
+
+        query.setParameter(1, cost);
+
+        return query.getResultList();
+    }
+
+    public List<Item> filterItemsByNames(String locationName) {
+        TypedQuery<Item> query = entityManager.createQuery(
+                "SELECT i FROM Item i WHERE i.name =?1 ORDER BY i.name ASC", Item.class
+        );
+
+        query.setParameter(1, locationName);
+
+        return query.getResultList();
+    }
+
 
     public Long createItem(String name, String ability, int value) {
         Item item = new Item();
