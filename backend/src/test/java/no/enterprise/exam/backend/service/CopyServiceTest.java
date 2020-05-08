@@ -1,9 +1,12 @@
 package no.enterprise.exam.backend.service;
 
+/*
+    I made these tests myself, but i'm not sure if it counts as borrowed by the repository, so ill just add the closest link i can find
+    https://github.com/arcuri82/testing_security_development_enterprise_systems/blob/master/intro/exercise-solutions/quiz-game/part-11/backend/src/test/java/org/tsdes/intro/exercises/quizgame/backend/service/CategoryServiceTest.java
+ */
 
 import no.enterprise.exam.backend.TestApplication;
 import no.enterprise.exam.backend.entity.Users;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,5 +1,9 @@
 package no.enterprise.exam.backend.service;
 
+/*
+    Gotten from https://github.com/arcuri82/testing_security_development_enterprise_systems/blob/master/intro/exercise-solutions/quiz-game/part-11/backend/src/test/java/org/tsdes/intro/exercises/quizgame/backend/service/DefaultDataInitializerServiceTest.java
+ */
+
 import no.enterprise.exam.backend.TestApplication;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

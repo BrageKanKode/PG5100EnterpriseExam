@@ -7,8 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.context.annotation.SessionScope;
 
 import javax.inject.Named;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Named
 @SessionScope
@@ -22,7 +22,7 @@ public class ItemController {
     private CopyService copyService;
 
     public List<Item> getItems() {
-        return itemService.getAllItems(true).stream().collect(Collectors.toList());
+        return new ArrayList<>(itemService.getAllItems(true));
     }
 
     public void millItem(Long itemId, String userId){

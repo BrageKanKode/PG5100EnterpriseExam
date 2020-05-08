@@ -7,6 +7,10 @@ import org.openqa.selenium.WebDriver;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+/*
+    Altered the other PO's to fit the assignment
+ */
+
 public class UserPO extends LayoutPO {
 
     public UserPO(WebDriver driver, String host, int port) {

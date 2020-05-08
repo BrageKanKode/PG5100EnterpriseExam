@@ -1,5 +1,9 @@
 package no.enterprise.exam.selenium;
 
+/*
+    Something of https://github.com/arcuri82/testing_security_development_enterprise_systems/blob/master/intro/exercise-solutions/quiz-game/part-11/frontend/src/test/java/org/tsdes/intro/exercises/quizgame/selenium/SeleniumLocalIT.java
+ */
+
 import no.enterprise.exam.Application;
 import no.enterprise.exam.backend.entity.Item;
 import no.enterprise.exam.backend.service.ItemService;
@@ -210,7 +214,7 @@ public class SeleniumLocalIT {
         assertEquals(1, home.getNumberOfItemsDisplayed());
 
         for(int i=0; i<3; i++){
-        userHome.redeemLootbox();
+            userHome.redeemLootbox();
         }
 
         String currencyValue = home.getText("currencyValue").split(" ")[1];

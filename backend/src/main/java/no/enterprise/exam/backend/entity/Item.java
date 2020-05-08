@@ -1,5 +1,9 @@
 package no.enterprise.exam.backend.entity;
 
+/*
+    Based on, but my on version: https://github.com/arcuri82/testing_security_development_enterprise_systems/blob/master/intro/exercise-solutions/quiz-game/part-11/backend/src/main/java/org/tsdes/intro/exercises/quizgame/backend/entity/MatchStats.java
+ */
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
