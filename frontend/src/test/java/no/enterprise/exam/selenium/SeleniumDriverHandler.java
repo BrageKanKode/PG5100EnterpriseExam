@@ -18,9 +18,9 @@ public class SeleniumDriverHandler {
     private static boolean tryToSetGeckoIfExists(String property, Path path) {
         if (Files.exists(path)) {
             System.setProperty(property, path.toAbsolutePath().toString());
-            return true;
+            return false;
         }
-        return false;
+        return true;
     }
 
     private static boolean setupDriverExecutable(String executableName, String property) {
@@ -29,9 +29,9 @@ public class SeleniumDriverHandler {
         System.out.println(homeDir);
 
         //first try Linux/Mac executable
-        if (!tryToSetGeckoIfExists(property, Paths.get(homeDir, executableName))) {
+        if (tryToSetGeckoIfExists(property, Paths.get(homeDir, executableName))) {
             //then check if on Windows
-            if (!tryToSetGeckoIfExists(property, Paths.get(homeDir, executableName + ".exe"))) {
+            if (tryToSetGeckoIfExists(property, Paths.get(homeDir, executableName + ".exe"))) {
 
                 return false;
             }

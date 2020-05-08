@@ -14,7 +14,6 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Controller;
 
 import javax.enterprise.context.RequestScoped;
-import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 
 @RequestScoped
@@ -41,7 +40,7 @@ public class SignUpController {
         boolean registered = false;
         try {
             registered = userService.createUser(username, username, username + "last", password, username + "@email.com", "user", 100, 3);
-        } catch (Exception e) {
+        } catch (Exception ignored) {
 
         }
 

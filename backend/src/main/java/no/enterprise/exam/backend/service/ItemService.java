@@ -69,10 +69,9 @@ public class ItemService {
                 .createQuery("SELECT item FROM Item item", Item.class)
                 .setFirstResult(rnd)
                 .setMaxResults(1);
-        Item item = query.getSingleResult();
 
 
-        return item;
+        return query.getSingleResult();
     }
 
     public List<Item> filterByValue(Integer value) {

@@ -38,7 +38,6 @@ public class CopyService {
         }
 
         if(user.getCurrency() < 100){
-            return;
         } else {
             int lootbox = user.getLootboxes() + 1;
             user.setLootboxes(lootbox);

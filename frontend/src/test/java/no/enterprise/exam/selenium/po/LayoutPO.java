@@ -33,14 +33,13 @@ public abstract class LayoutPO extends PageObject {
         return po;
     }
 
-    public IndexPO doLogout() {
+    public void doLogout() {
 
         clickAndWait("logoutBtn");
 
         IndexPO po = new IndexPO(this);
         assertTrue(po.isOnPage());
 
-        return po;
     }
 
     public boolean isLoggedIn() {
@@ -49,14 +48,13 @@ public abstract class LayoutPO extends PageObject {
                 getDriver().findElements((By.id("linkToSignupId"))).isEmpty();
     }
 
-    public UserPO toUserPage() {
+    public void toUserPage() {
 
         clickAndWait("linkToUser");
 
         UserPO po = new UserPO(this);
         assertTrue(po.isOnPage());
 
-        return po;
     }
 
 

@@ -26,31 +26,28 @@ public class UserPO extends LayoutPO {
         return getDriver().getTitle().contains("User page");
     }
 
-    public UserPO redeemLootbox() {
+    public void redeemLootbox() {
 
         clickAndWait("openLootboxBtn");
 
         UserPO po = new UserPO(this);
         assertTrue(po.isOnPage());
 
-        return po;
     }
 
-    public UserPO buyLootbox() {
+    public void buyLootbox() {
         clickAndWait("buyBtn");
 
         UserPO po = new UserPO(this);
         assertTrue(po.isOnPage());
 
-        return po;
     }
 
-    public UserPO millLootbox() {
+    public void millLootbox() {
         clickAndWait("itemTable:2:millBtn");
 
         UserPO po = new UserPO(this);
         assertTrue(po.isOnPage());
 
-        return po;
     }
 }

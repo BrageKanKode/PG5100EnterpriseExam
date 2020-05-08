@@ -34,9 +34,9 @@ public class ItemServiceTest {
     @Test
     public void testGetRandomItem() {
         userService.createUser("JackBlack", "Jackie", "Black", "123", "Jack@email.com", "user", 100, 3);
-        Long itemJigg = itemService.createItem("Jigglypuff", "sleep", 100);
-        Long itemBowser = itemService.createItem("Bowser", "Sit", 200);
-        Long itemErik = itemService.createItem("Erik", "help", 500);
+        itemService.createItem("Jigglypuff", "sleep", 100);
+        itemService.createItem("Bowser", "Sit", 200);
+        itemService.createItem("Erik", "help", 500);
         var randomItem = itemService.getRandomItems(2);
 
         assertNotNull(randomItem);

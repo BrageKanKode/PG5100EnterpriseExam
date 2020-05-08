@@ -50,8 +50,8 @@ public class CopyServiceTest extends ServiceTestBase{
         userService.createUser("JackBlack", "Jackie", "Black", "123", "Jack@email.com", "user", 100, 3);
         Long ItemID = itemService.createItem("Test", "Desc", 200);
         Long ItemID2 = itemService.createItem("Test2", "Desc", 200);
-        Long addedID = copyService.addItemToUser(ItemID, "JackBlack");
-        Long addedID2 = copyService.addItemToUser(ItemID2, "JackBlack");
+        copyService.addItemToUser(ItemID, "JackBlack");
+        copyService.addItemToUser(ItemID2, "JackBlack");
 
         copyService.sellItem(ItemID, "JackBlack");
 

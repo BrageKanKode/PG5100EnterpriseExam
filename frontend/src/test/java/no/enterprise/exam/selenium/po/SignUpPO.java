@@ -5,15 +5,10 @@ package no.enterprise.exam.selenium.po;
  */
 
 import no.enterprise.exam.selenium.PageObject;
-import org.openqa.selenium.WebDriver;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class SignUpPO extends LayoutPO {
-
-    public SignUpPO(WebDriver driver, String host, int port) {
-        super(driver, host, port);
-    }
 
     public SignUpPO(PageObject other) {
         super(other);
