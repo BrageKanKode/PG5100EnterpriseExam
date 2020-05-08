@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.context.annotation.SessionScope;
 
 import javax.inject.Named;
-import javax.persistence.EntityManager;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -15,18 +14,15 @@ import java.util.stream.Collectors;
 @SessionScope
 public class ItemController {
 
-    @Autowired
-    private EntityManager entityManager;
 
     @Autowired
     private ItemService itemService;
+
     @Autowired
     private CopyService copyService;
 
-    private Long itemID;
-
-    public List<Item> getItems(int numberOfItems) {
-        return itemService.getAllItems(true).stream().limit(numberOfItems).collect(Collectors.toList());
+    public List<Item> getItems() {
+        return itemService.getAllItems(true).stream().collect(Collectors.toList());
     }
 
     public void millItem(Long itemId, String userId){
@@ -50,13 +46,4 @@ public class ItemController {
             return null;
         }
     }
-
-
-
-    public String getMonsterRedirectionLink(Long itemID){
-        return "/details.jsf?monsterID=" + itemID + "&faces-redirect=true";
-    }
-
-
-
 }

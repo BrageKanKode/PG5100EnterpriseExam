@@ -1,26 +1,18 @@
 package no.enterprise.exam.backend.service;
 
-import no.enterprise.exam.backend.entity.Item;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
-import java.util.List;
 import java.util.function.Supplier;
 
-import static org.hibernate.validator.internal.util.Contracts.assertNotNull;
 
 @Service
 public class DefaultDataInitializerService {
 
     @Autowired
-    private UserService userService;
-
-    @Autowired
     private ItemService itemService;
 
-    @Autowired
-    private CopyService copyService;
 
 
 

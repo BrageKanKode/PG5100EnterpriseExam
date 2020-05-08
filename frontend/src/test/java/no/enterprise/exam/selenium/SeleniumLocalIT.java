@@ -5,6 +5,7 @@ import no.enterprise.exam.backend.entity.Item;
 import no.enterprise.exam.backend.service.ItemService;
 import no.enterprise.exam.selenium.po.IndexPO;
 import no.enterprise.exam.selenium.po.SignUpPO;
+import no.enterprise.exam.selenium.po.UserPO;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
@@ -70,6 +71,7 @@ public class SeleniumLocalIT {
     }
 
     private IndexPO home;
+    private UserPO userHome;
 
     private IndexPO createNewUser(String username, String password) {
         home.toStartingPage();
@@ -88,6 +90,7 @@ public class SeleniumLocalIT {
         getDriver().manage().deleteAllCookies();
 
         home = new IndexPO(getDriver(), getServerHost(), getServerPort());
+        userHome = new UserPO(getDriver(), getServerHost(), getServerPort());
 
         home.toStartingPage();
 
@@ -158,7 +161,7 @@ public class SeleniumLocalIT {
         assertEquals("3", lootboxValue.split(" ")[1]);
 
         for(int i=0; i<2; i++){
-            home.redeemLootbox();
+            userHome.redeemLootbox();
         }
 
         lootboxValue = home.getText("lootboxValue");
@@ -183,7 +186,7 @@ public class SeleniumLocalIT {
         assertEquals(1, home.getNumberOfItemsDisplayed());
 
         for(int i=0; i<3; i++){
-            home.redeemLootbox();
+            userHome.redeemLootbox();
         }
 
         lootboxValue = home.getText("lootboxValue");
@@ -207,14 +210,14 @@ public class SeleniumLocalIT {
         assertEquals(1, home.getNumberOfItemsDisplayed());
 
         for(int i=0; i<3; i++){
-        home.redeemLootbox();
+        userHome.redeemLootbox();
         }
 
         String currencyValue = home.getText("currencyValue").split(" ")[1];
         assertEquals("100", currencyValue);
         assertEquals(3, home.getNumberOfItemsDisplayed());
 
-        home.millLootbox();
+        userHome.millLootbox();
         currencyValue = home.getText("currencyValue").split(" ")[1];
         assertNotEquals("100", currencyValue);
         assertEquals(2, home.getNumberOfItemsDisplayed());
@@ -245,7 +248,7 @@ public class SeleniumLocalIT {
         assertEquals("100", currencyValue);
         assertEquals("3", lootboxValue);
 
-        home.buyLootbox();
+        userHome.buyLootbox();
 
         currencyValue = home.getText("currencyValue").split(" ")[1];
         lootboxValue = home.getText("lootboxValue").split(" ")[1];
@@ -269,7 +272,5 @@ public class SeleniumLocalIT {
         home = home.searchOnPage("byName", firstItem.getName());
 
         assertTrue(home.isInFirstColumn(firstItem.getId().toString()));
-
-
     }
 }

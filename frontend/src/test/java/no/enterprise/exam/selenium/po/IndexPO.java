@@ -6,8 +6,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 
-import java.util.List;
-import java.util.Random;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -43,36 +41,6 @@ public class IndexPO extends LayoutPO {
     @Override
     public boolean isOnPage() {
         return getDriver().getTitle().contains("Home page");
-    }
-
-    public UserPO redeemLootbox() {
-
-        clickAndWait("openLootboxBtn");
-
-        UserPO po = new UserPO(this);
-        assertTrue(po.isOnPage());
-
-        return po;
-    }
-
-    public UserPO buyLootbox() {
-        clickAndWait("buyBtn");
-
-        UserPO po = new UserPO(this);
-        assertTrue(po.isOnPage());
-
-        return po;
-    }
-
-    public UserPO millLootbox() {
-        clickAndWait("itemTable:2:millBtn");
-
-        UserPO po = new UserPO(this);
-        assertTrue(po.isOnPage());
-
-        return po;
-
-
     }
 
 

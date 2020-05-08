@@ -54,10 +54,5 @@ public class CopyServiceTest extends ServiceTestBase{
 
         Users users = entityManager.find(Users.class, "JackBlack");
         assertEquals(300, users.getCurrency());
-
-
     }
-
-
-
 }
