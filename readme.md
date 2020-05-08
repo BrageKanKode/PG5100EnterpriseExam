@@ -19,14 +19,17 @@ ships there yet.
 ##Requirements checked
 I have done R1, R2, R3, R4 and R5
 
+##Coverage
+backend: 88%
+
+frontend: 92%
+
+Total: 89%
+
 ##Extra features
 The extra feature consists of a search feature at the home page, with the ability to search by Value of the card, 
 or a ship name. There is not currently an errormessage if the search doesn't find anything, but i thought that was ok. 
 No result is just as good as some text telling you there is no result.
-
-
-
-
 
 
 
