@@ -1,6 +1,8 @@
 package no.enterprise.exam.selenium;
 
 import no.enterprise.exam.Application;
+import no.enterprise.exam.backend.entity.Item;
+import no.enterprise.exam.backend.service.ItemService;
 import no.enterprise.exam.selenium.po.IndexPO;
 import no.enterprise.exam.selenium.po.SignUpPO;
 import org.junit.jupiter.api.AfterAll;
@@ -9,11 +11,13 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.openqa.selenium.WebDriver;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.web.server.LocalServerPort;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
+import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -248,5 +252,24 @@ public class SeleniumLocalIT {
 
         assertEquals("0", currencyValue);
         assertEquals("4", lootboxValue);
+    }
+
+    @Autowired
+    ItemService itemService;
+
+    @Test
+    public void testSearch() {
+        List<Item> allItems = itemService.getAllItems(false);
+        Item firstItem = allItems.get(0);
+        home = home.searchOnPage("byValue", firstItem.getValue().toString());
+
+        assertTrue(home.isInFirstColumn(firstItem.getId().toString()));
+
+        home.toStartingPage();
+        home = home.searchOnPage("byName", firstItem.getName());
+
+        assertTrue(home.isInFirstColumn(firstItem.getId().toString()));
+
+
     }
 }
